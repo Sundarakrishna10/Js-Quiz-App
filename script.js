@@ -1,96 +1,55 @@
 const questions = [
     {
         question: "What is 2 + 2?",
-        answers: [
-            { text: "4", correct: true },
-            { text: "5", correct: false },
-            { text: "3", correct: false },
-            { text: "6", correct: false }
-        ]
+        correctAnswer: "4",
+        answers: ["4", "5", "3", "6"]
     },
     {
         question: "What is the capital of France?",
-        answers: [
-            { text: "Paris", correct: true },
-            { text: "London", correct: false },
-            { text: "Berlin", correct: false },
-            { text: "Madrid", correct: false }
-        ]
+        correctAnswer: "Paris",
+        answers: ["Paris", "London", "Berlin", "Madrid"]
     },
     {
         question: "What is the largest planet in our solar system?",
-        answers: [
-            { text: "Earth", correct: false },
-            { text: "Jupiter", correct: true },
-            { text: "Mars", correct: false },
-            { text: "Saturn", correct: false }
-        ]
+        correctAnswer: "Jupiter",
+        answers: ["Earth", "Jupiter", "Mars", "Saturn"]
     },
     {
         question: "Who wrote 'To Kill a Mockingbird'?",
-        answers: [
-            { text: "Harper Lee", correct: true },
-            { text: "Mark Twain", correct: false },
-            { text: "Ernest Hemingway", correct: false },
-            { text: "F. Scott Fitzgerald", correct: false }
-        ]
+        correctAnswer: "Harper Lee",
+        answers: ["Harper Lee", "Mark Twain", "Ernest Hemingway", "F. Scott Fitzgerald"]
     },
     {
         question: "What is the chemical symbol for water?",
-        answers: [
-            { text: "O2", correct: false },
-            { text: "H2O", correct: true },
-            { text: "CO2", correct: false },
-            { text: "H2", correct: false }
-        ]
+        correctAnswer: "H2O",
+        answers: ["O2", "H2O", "CO2", "H2"]
     },
     {
         question: "What is the fastest land animal?",
-        answers: [
-            { text: "Lion", correct: false },
-            { text: "Cheetah", correct: true },
-            { text: "Elephant", correct: false },
-            { text: "Gazelle", correct: false }
-        ]
+        correctAnswer: "Cheetah",
+        answers: ["Lion", "Cheetah", "Elephant", "Gazelle"]
     },
     {
         question: "What is the capital of Japan?",
-        answers: [
-            { text: "Tokyo", correct: true },
-            { text: "Kyoto", correct: false },
-            { text: "Osaka", correct: false },
-            { text: "Nagoya", correct: false }
-        ]
+        correctAnswer: "Tokyo",
+        answers: ["Tokyo", "Kyoto", "Osaka", "Nagoya"]
     },
     {
         question: "Who painted the Mona Lisa?",
-        answers: [
-            { text: "Vincent van Gogh", correct: false },
-            { text: "Pablo Picasso", correct: false },
-            { text: "Leonardo da Vinci", correct: true },
-            { text: "Claude Monet", correct: false }
-        ]
+        correctAnswer: "Leonardo da Vinci",
+        answers: ["Vincent van Gogh", "Pablo Picasso", "Leonardo da Vinci", "Claude Monet"]
     },
     {
         question: "What is the square root of 64?",
-        answers: [
-            { text: "6", correct: false },
-            { text: "7", correct: false },
-            { text: "8", correct: true },
-            { text: "9", correct: false }
-        ]
+        correctAnswer: "8",
+        answers: ["6", "7", "8", "9"]
     },
     {
         question: "What is the capital of Australia?",
-        answers: [
-            { text: "Sydney", correct: false },
-            { text: "Melbourne", correct: false },
-            { text: "Canberra", correct: true },
-            { text: "Brisbane", correct: false }
-        ]
+        correctAnswer: "Canberra",
+        answers: ["Sydney", "Melbourne", "Canberra", "Brisbane"]
     }
 ];
-
 
 let currentQuestionIndex = 0;
 let score = 0;
@@ -121,12 +80,12 @@ function setNextQuestion() {
 
 function showQuestion(question) {
     questionElement.innerText = question.question;
-    question.answers.map(answer => {
+    question.answers.forEach(answer => {
         const button = document.createElement("button");
-        button.innerText = answer.text;
+        button.innerText = answer;
         button.classList.add("btn");
-        if (answer.correct) {
-            button.dataset.correct = answer.correct;
+        if (answer === question.correctAnswer) {
+            button.dataset.correct = true;
         }
         button.addEventListener('click', selectAnswer);
         answerButtonsElement.appendChild(button);
@@ -148,8 +107,8 @@ function selectAnswer(e) {
     if (correct) {
         score++;
     }
-    Array.from(answerButtonsElement.children).map(button => {
-        setStatusClass(button, button.dataset.correct);
+    Array.from(answerButtonsElement.children).forEach(button => {
+        setStatusClass(button, button.dataset.correct === "true");
     });
     clearInterval(timerInterval);
     setTimeout(() => {
