@@ -47,10 +47,6 @@ body {
     font-size: 18px;
 }
 
-.btn:hover {
-    background-color: #0056b3;
-}
-
 .timer {
     margin-top: 20px;
     font-size: 1.2em;
